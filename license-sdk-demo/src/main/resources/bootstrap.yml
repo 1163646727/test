@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: license-sdk-demo
+  cloud:
+    config:
+      enabled: false
+    consul:
+      host: ${consul_host:10.20.21.9}
+      port: ${consul_port:8500}
+      dc: ${consul_dc:boclouddatacentor}
+      enabled: true
+      discovery:
+        enabled: true
+        register: true
+        serviceName: ${spring.application.name}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+        prefer-ip-address: true
+        tags: urlprefix-/${spring.application.name}
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${spring.cloud.client.hostname}:${server.port}}}
+        acl-token: ${acl_token:p2BE1AtpwPbrxZdC6k+eXA==}
+      config:
+        enabled: true #默认是true
+        format: YAML
+        data-key: serviceconfig #表示consul上面的KEY值(或者说文件的名字) 默认是data
+        acl-token: ${acl_token:p2BE1AtpwPbrxZdC6k+eXA==}

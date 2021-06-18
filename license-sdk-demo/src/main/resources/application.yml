@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+
+#配置license-server集群地址
+grpc:
+  server:
+    addresses: 10.20.21.9:6565
+
+#数据库配置（数据库锁)
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.20.21.9/license_sdk?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+#获取部署节点数据，并上报至license-server数据库中存储
+schedule:
+  nodeReporterCron: 0 * 1 * * ?
